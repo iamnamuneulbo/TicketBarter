@@ -4,18 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BbsDAO {
 	private Connection conn;
 	private ResultSet rs;
-
+	private PreparedStatement pstmt;
 	public BbsDAO() {
 		try {
 			String dbURL = "jdbc:mysql://3.13.163.79:3306/BBS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Seoul";
 			String dbID = "admin";
 			String dbPassword = "ifnt0719";
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -25,7 +26,7 @@ public class BbsDAO {
 	public String getDate() {
 		String SQL = "SELECT NOW()";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				return rs.getString(1);
@@ -39,7 +40,7 @@ public class BbsDAO {
 	public int getNext() {
 		String SQL = "SELECT bbsID FROM BBS ORDER BY bbsID DESC";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				return rs.getInt(1) + 1;
@@ -54,7 +55,7 @@ public class BbsDAO {
 	public int write(String bbsTitle, String userID, String bbsContent, String bbsCategory) {
 		String SQL = "INSERT INTO BBS VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext());
 			pstmt.setString(2, bbsTitle);
 			pstmt.setString(3, userID);
@@ -73,7 +74,7 @@ public class BbsDAO {
 		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -96,7 +97,7 @@ public class BbsDAO {
 		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
 		ArrayList<Bbs> list = new ArrayList<Bbs>();
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -111,7 +112,7 @@ public class BbsDAO {
 	public Bbs getBbs(int bbsID) {
 		String SQL = "SELECT * FROM BBS WHERE bbsID = ?";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -134,7 +135,7 @@ public class BbsDAO {
 	public int update(int bbsID, String bbsTitle, String bbsContent) {
 		String SQL = "UPDATE BBS SET bbsContent = ? WHERE bbsID = ?";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, bbsContent);
 			pstmt.setInt(2, bbsID);
 			return pstmt.executeUpdate();
@@ -142,7 +143,7 @@ public class BbsDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		String SQL2 = "UPDATE TICKET_INFO SET  WHERE bbsID = ?";
 		return -1;
 	}
@@ -150,14 +151,29 @@ public class BbsDAO {
 	public int delete(int bbsID) {
 		String SQL = "UPDATE BBS SET bbsAvailable = 0 WHERE bbsID = ?";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, bbsID);
 			return pstmt.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return -1;
+	}
+
+	private void close() {
+		try {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

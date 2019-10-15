@@ -64,7 +64,7 @@
 														.format(list.get(i).getShowDateTime());
 										%>
 										<button class="dropdown-item" type="button"
-											onclick="make_title(this, 1);"><%=showDateTime%></button>
+											onclick="make_title_my(this, 1);"><%=showDateTime%></button>
 										<%
 											}
 										%>
@@ -79,14 +79,14 @@
 								<div class="input-group mb-2">
 									<input type="text" class="form-control"
 										name="my-ticket-block" style="text-transform: uppercase"
-										onchange="make_title(this, 2);" maxlength="10" placeholder="예: A">
+										onchange="make_title_my(this, 2);" maxlength="10" placeholder="예: A">
 									<div class="input-group-append">
 										<span class="input-group-text">구역</span>
 									</div>
 								</div>
 								<div class="input-group">
 									<input type="text" class="form-control" name="my-ticket-row"
-										style="text-transform: uppercase" onchange="make_title(this, 3);" maxlength="10" placeholder="예: 2">
+										style="text-transform: uppercase" onchange="make_title_my(this, 3);" maxlength="10" placeholder="예: 2">
 									<div class="input-group-append">
 										<span class="input-group-text">열(번호대)</span>
 									</div>
@@ -135,14 +135,14 @@
 								<div class="input-group mb-2">
 									<input type="text" class="form-control"
 										name="other-ticket-block" style="text-transform: uppercase"
-										onchange="make_title2(1);" maxlength="10" placeholder="예: B">
+										onchange="make_title_other(1);" maxlength="10" placeholder="예: B">
 									<div class="input-group-append">
 										<span class="input-group-text">구역</span>
 									</div>
 								</div>
 								<div class="input-group">
 									<input type="text" class="form-control" name="other-ticket-row"
-										style="text-transform: uppercase" onchange="make_title2(2);" maxlength="10" placeholder="예: 2">
+										style="text-transform: uppercase" onchange="make_title_other(2);" maxlength="10" placeholder="예: 2">
 									<div class="input-group-append">
 										<span class="input-group-text">열(번호대)</span>
 									</div>

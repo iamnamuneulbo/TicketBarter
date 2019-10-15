@@ -9,7 +9,7 @@ var my_ticket_row = "";
 var other_ticket_block = "";
 var other_ticket_row = "";
 	
-function make_title(doc, flag) {
+function make_title_my(doc, flag) {
 	if (flag == 1) {
 		var my_ticket = $("div[name=title_my_ticket]"); // 제목 박스
 		var dropdown_my_date = $("button[name=dropdown_my_date]"); // 날짜 선택 버튼
@@ -30,7 +30,7 @@ function make_title(doc, flag) {
 	}
 }
 
-function make_title2(flag) {
+function make_title_other(flag) {
 	if (flag == 1) {
 		other_ticket_block = " " + $("input[name=other-ticket-block]").val() + "구역";
 	}
@@ -57,7 +57,10 @@ $(document).ready(function() {
                 }
             });
             $("input[type=text][name=other-ticket-date\n]").val(line);
-
+            
+            if ($('input[name=other-ticket-date-cb]:checked').length == 0) {
+            	$("[name=title_other_tickets] div")[0].innerText = "상대 티켓";
+            }
         });
     });
 });
