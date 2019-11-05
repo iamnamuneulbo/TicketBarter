@@ -30,10 +30,12 @@
 		if (result == 1) {
 			session.setAttribute("userID", user.getUserID()); 
 			PrintWriter script = response.getWriter();
+			
 			script.println("<script>");
-			script.println("alert('로그인 성공')");	
+			script.println("alert('로그인 성공')");
 			script.println("location.href = 'main.jsp'");
 			script.println("</script>");
+			
 		}
 		//로그인 실패
 		else if (result == 0) {

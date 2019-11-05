@@ -26,7 +26,7 @@ function make_title_my(doc, flag) {
 		}
 
 		var my_seat = $("div[name=title_my_seat]"); // 제목 박스
-		my_seat[0].innerText = my_ticket_block + my_ticket_row;
+		my_seat[0].innerText = (my_ticket_block + my_ticket_row).toUpperCase();
 	}
 }
 
@@ -39,7 +39,7 @@ function make_title_other(flag) {
 	}
 	
 	var other_seat = $("div[name=title_other_seat]"); // 제목 박스
-	other_seat[0].innerText = other_ticket_block + other_ticket_row;
+	other_seat[0].innerText = (other_ticket_block + other_ticket_row).toUpperCase();
 }
 
 $(document).ready(function() {

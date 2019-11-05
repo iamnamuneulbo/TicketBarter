@@ -15,10 +15,6 @@
 <!-- 스타일시트 참조  -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <title>티켓바터</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/maketitle.js"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp">
@@ -58,7 +54,7 @@
 										<%
 											ShowDateTimeDAO showDateTimeDAO = new ShowDateTimeDAO();
 											ArrayList<ShowDateTime> list = showDateTimeDAO.getDateTime(1);
-											
+
 											for (int i = 0; i < list.size(); i++) {
 												String showDateTime = new java.text.SimpleDateFormat("MM/dd hh:mm aa", new Locale("en", "US"))
 														.format(list.get(i).getShowDateTime());
@@ -77,16 +73,19 @@
 							<td class="align-middle">좌석 정보</td>
 							<td>
 								<div class="input-group mb-2">
-									<input type="text" class="form-control"
-										name="my-ticket-block" style="text-transform: uppercase"
-										onchange="make_title_my(this, 2);" maxlength="10" placeholder="예: A">
+									<input type="text" class="form-control" name="my-ticket-block"
+										style="text-transform: uppercase"
+										onchange="make_title_my(this, 2);" maxlength="10"
+										placeholder="예: A">
 									<div class="input-group-append">
 										<span class="input-group-text">구역</span>
 									</div>
 								</div>
 								<div class="input-group">
 									<input type="text" class="form-control" name="my-ticket-row"
-										style="text-transform: uppercase" onchange="make_title_my(this, 3);" maxlength="10" placeholder="예: 2">
+										style="text-transform: uppercase"
+										onchange="make_title_my(this, 3);" maxlength="10"
+										placeholder="예: 2">
 									<div class="input-group-append">
 										<span class="input-group-text">열(번호대)</span>
 									</div>
@@ -103,23 +102,24 @@
 											class="btn btn-info btn-default dropdown-toggle w-100"
 											type="button">날짜 선택</button>
 										<ul role="menu" class="dropdown-menu">
-											
-										<%
-											for (int i = 0; i < list.size(); i++) {
-												String showDateTime = new java.text.SimpleDateFormat("MM/dd hh:mm aa", new Locale("en", "US"))
-													.format(list.get(i).getShowDateTime());
-										%>
+
+											<%
+												for (int i = 0; i < list.size(); i++) {
+													String showDateTime = new java.text.SimpleDateFormat("MM/dd hh:mm aa", new Locale("en", "US"))
+															.format(list.get(i).getShowDateTime());
+											%>
 											<li>
 												<div class="dropdown-item custom-control custom-checkbox">
-													&nbsp <input type="checkbox" id="other-ticket-date-cb<%=i+1%>"
+													&nbsp <input type="checkbox"
+														id="other-ticket-date-cb<%=i + 1%>"
 														name="other-ticket-date-cb" class="custom-control-input">
 													<label class="custom-control-label"
-														for="other-ticket-date-cb<%=i+1%>"><%=showDateTime%></label>
+														for="other-ticket-date-cb<%=i + 1%>"><%=showDateTime%></label>
 												</div>
 											</li>
-										<%
-											}
-										%>
+											<%
+												}
+											%>
 										</ul>
 									</div>
 									<div class="col">
@@ -135,14 +135,17 @@
 								<div class="input-group mb-2">
 									<input type="text" class="form-control"
 										name="other-ticket-block" style="text-transform: uppercase"
-										onchange="make_title_other(1);" maxlength="10" placeholder="예: B">
+										onchange="make_title_other(1);" maxlength="10"
+										placeholder="예: B">
 									<div class="input-group-append">
 										<span class="input-group-text">구역</span>
 									</div>
 								</div>
 								<div class="input-group">
 									<input type="text" class="form-control" name="other-ticket-row"
-										style="text-transform: uppercase" onchange="make_title_other(2);" maxlength="10" placeholder="예: 2">
+										style="text-transform: uppercase"
+										onchange="make_title_other(2);" maxlength="10"
+										placeholder="예: 2">
 									<div class="input-group-append">
 										<span class="input-group-text">열(번호대)</span>
 									</div>
@@ -153,16 +156,18 @@
 							<td class="align-middle">글 제목</td>
 							<td colspan="2">
 								<div class="mb-2">
-									<div class="btn btn-dark" name="title_my_ticket" style="text-transform: uppercase">내 티켓</div>
-									<div class="btn btn-outline-dark" name="title_my_seat">좌석</div>을<br/>
+									<div class="btn btn-dark" name="title_my_ticket"
+										style="text-transform: uppercase">내 티켓</div>
+									<div class="btn btn-outline-dark" name="title_my_seat">좌석</div>
+									을<br />
 								</div>
 								<div class="mb-2">
 									<div class="btn-group-vertical" name="title_other_tickets">
-									  <div class="btn btn-info">상대 티켓</div>
+										<div class="btn btn-info">상대 티켓</div>
 									</div>
-									<div class="btn btn-outline-info" name="title_other_seat">좌석</div>으로 교환
-								</div>
-								<input type="text" class="form-control align-middle"
+									<div class="btn btn-outline-info" name="title_other_seat">좌석</div>
+									으로 교환
+								</div> <input type="text" class="form-control align-middle"
 								placeholder="추가 정보(최대 20자)" name="bbsTitle" maxlength="20" />
 							</td>
 						</tr>
@@ -189,6 +194,6 @@
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
-
+	<script type="text/javascript" src="js/maketitle.js"></script>
 </body>
 </html>
