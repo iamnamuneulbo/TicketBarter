@@ -1,5 +1,5 @@
 # 🎫TicketBarter
- - <http://3.13.163.79:8080/TicketBarter/write.jsp>
+ - <http://3.136.120.235:8080/TicketBarter/write.jsp>
  - 공연 티켓 교환을 위한 웹 서비스
  - 자신이 가지고 있는 티켓의 정보(관람일, 좌석 위치 등)와 희망하는 티켓의 정보를 입력해서 원하는 티켓을 쉽게 찾을 수 있도록 도움
 
